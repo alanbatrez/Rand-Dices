@@ -1,50 +1,37 @@
+// Generate two random numbers between 1 and 6
+const randNumber1 = Math.floor(Math.random() * 6) + 1;
+const randNumber2 = Math.floor(Math.random() * 6) + 1;
 
-let randNumber1 = Math.floor(Math.random()* 6) +1;
-
-let randNumber2 = Math.floor(Math.random()* 6) +1;
-
-
-
+// Array of dice images (index 0 to 5)
 const dicesExamples = [
-    './images/dice1.png',
-    './images/dice2.png',
-    './images/dice3.png',
-    './images/dice4.png',
-    './images/dice5.png',
-    './images/dice6.png'
-]
+  './images/dice1.png',
+  './images/dice2.png',
+  './images/dice3.png',
+  './images/dice4.png',
+  './images/dice5.png',
+  './images/dice6.png'
+];
 
-let dice1 = document.querySelector(".img1");
-let dice2 = document.querySelector(".img2");
+// Select both dice image elements from the DOM
+const dice1 = document.querySelector(".img1");
+const dice2 = document.querySelector(".img2");
 
-//We set the random n
+// Calculate image index based on random number (subtract 1 because arrays are zero-based)
+const randRestIndex1 = randNumber1 - 1;
+const randRestIndex2 = randNumber2 - 1;
 
-let randRestIndex = randNumber1 -1;
-let randRestIndex2 = randNumber2 -1;
+// Set the correct dice image source for each player
+dice1.setAttribute("src", dicesExamples[randRestIndex1]);
+dice2.setAttribute("src", dicesExamples[randRestIndex2]);
 
-let selectedSrc1 = dicesExamples[randRestIndex];
-console.log(selectedSrc1);
+// Select the title element inside the container to show the result
+const result = document.querySelector(".container").firstElementChild;
 
-
-dice1.setAttribute("src", selectedSrc1);
-
-
-let selectedSrc2 = dicesExamples[randRestIndex2];
-console.log(selectedSrc2);
-
-dice2.setAttribute("src", selectedSrc2);
-
-
-const winner = (n1, n2) => {
-    setTimeout(() => {
-        if (n1 > n2) {
-            alert("Jugador 1 gana 🎉");
-        } else if (n2 > n1) {
-            alert("Jugador 2 gana 🎉");
-        } else {
-            alert("Empate 🤝");
-        }
-    }, 1500);
-};
-
-winner(randNumber1 , randNumber2);
+// Compare both random numbers and show who wins
+if (randNumber1 > randNumber2) {
+  result.textContent = "Player One Wins!";
+} else if (randNumber1 < randNumber2) {
+  result.textContent = "Player Two Wins!";
+} else {
+  result.textContent = "Draw";
+}
